@@ -27,7 +27,7 @@ public class RectanglesController {
         System.out.println("Getting All Rectangles");
         List<Rectangles> rectangles = rectanglesRepo.findAll();
         model.addAttribute("rectangles", rectangles);
-        return "rectangles/showAll"; // Ensure 'showAll.html' is in 'src/main/resources/templates/'
+        return "rectangles/showAll"; 
     }
 
     @PostMapping("/rectangles/add")
@@ -40,34 +40,27 @@ public class RectanglesController {
 
         rectanglesRepo.save(new Rectangles(rectangleName, rectangleWidth, rectangleHeight, rectangleColor));
         response.setStatus(201);
-        return "rectangles/rectangleAdded"; // 'rectangleAdded.html' is in 'src/main/resources/templates/'
+        return "rectangles/rectangleAdded"; 
     }
 
     @GetMapping("rectangles/modify")
     public String modifyRectangle(@RequestParam("rid") int rid, Model model) {
         Rectangles rectangle = rectanglesRepo.findById(rid).orElse(null);
         model.addAttribute("rectangle", rectangle);
-        return "rectangles/displayUpdatedRectanglesForm"; // Ensure 'modify.html' is in 'src/main/resources/templates/'
+        return "rectangles/displayUpdatedRectanglesForm"; 
     }
 
     @GetMapping("/rectangles/display")
 public String viewRectangle(@RequestParam("rid") int rid, Model model) {
     Rectangles rectangle = rectanglesRepo.findById(rid).orElse(null);
     model.addAttribute("rectangle", rectangle);
-    return "rectangles/viewRectangle"; // Ensure 'viewRectangle.html' is in 'src/main/resources/templates/rectangles/'
+    return "rectangles/viewRectangle"; 
 }
     @GetMapping("/rectangle-form")
     public String viewForm() {
-        return "rectangles/rectangleForm"; // Ensure 'rectangleForm.html' is in 'src/main/resources/templates/'
+        return "rectangles/rectangleForm"; 
     }
-
-    // @GetMapping("/displayUpdatedRectanglesForm")
-    // public String viewUpdatedRectangleForm(@RequestParam("rid") int rid, Model model) {
-    //     Rectangles rectangle = rectanglesRepo.findById(rid).orElse(null);
-    //     model.addAttribute("rectangle", rectangle);
-    //     return "displayUpdatedRectanglesForm"; // Ensure 'displayUpdatedRectanglesForm.html' is in 'src/main/resources/templates/'
-    // }
-
+    
     @PostMapping("/rectangles/update")
     public String updateRectangle(@RequestParam Map<String, String> rectangleFormUpdated) {
         int rid = Integer.parseInt(rectangleFormUpdated.get("rid"));
