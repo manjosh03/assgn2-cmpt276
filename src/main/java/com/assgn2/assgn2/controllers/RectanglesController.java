@@ -50,6 +50,12 @@ public class RectanglesController {
         return "rectangles/displayUpdatedRectanglesForm"; // Ensure 'modify.html' is in 'src/main/resources/templates/'
     }
 
+    @GetMapping("/rectangles/display")
+public String viewRectangle(@RequestParam("rid") int rid, Model model) {
+    Rectangles rectangle = rectanglesRepo.findById(rid).orElse(null);
+    model.addAttribute("rectangle", rectangle);
+    return "rectangles/viewRectangle"; // Ensure 'viewRectangle.html' is in 'src/main/resources/templates/rectangles/'
+}
     @GetMapping("/rectangle-form")
     public String viewForm() {
         return "rectangles/rectangleForm"; // Ensure 'rectangleForm.html' is in 'src/main/resources/templates/'
