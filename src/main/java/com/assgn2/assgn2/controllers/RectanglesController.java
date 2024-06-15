@@ -54,7 +54,7 @@ public class RectanglesController {
         return "rectangles/rectangleForm";
     }
 
-    @GetMapping("/rectangleUpdatedForm")
+    @GetMapping("/displayUpdatedRectanglesForm")
     public String viewUpdatedRectangleForm(@RequestParam("id") int id, Model model)
     {
        Rectangles rectangle = rectanglesRepo.findById(id).orElse(null);
