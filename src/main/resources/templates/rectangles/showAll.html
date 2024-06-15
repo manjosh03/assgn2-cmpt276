@@ -3,39 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rectangle List</title>
+    <title>Show All Rectangles</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-md-10 mt-5">
-                <h1 class="text-center mb-4">Rectangles</h1>
+                <h1 class="text-center mb-4">All Rectangles</h1>
                 <div class="text-right mb-3">
-                    <button class="btn btn-primary" onclick="window.location.href='/rectangleForm'">Add Rectangle</button>
+                    <button class="btn btn-primary" onclick="window.location.href='/add.html'">Add Rectangle</button>
                 </div>
                 <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Color</th>
-                            <th>Action</th>
+                            <th>Width</th>
+                            <th>Height</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="rectangle : ${rectangles}">
-                            <td th:text="${rectangle.name}"></td>
+                            <td th:text="${rectangle.rid}"></td>
                             <td>
-                                <span th:style="'background-color:' + ${rectangle.color} + ';'" class="badge badge-pill">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                <span th:text="${rectangle.color}"></span>
+                                <a th:href="@{'/modify.html=' + ${rectangle.rid}}" th:text="${rectangle.name}"></a>
                             </td>
+                            <td th:text="${rectangle.color}"></td>
+                            <td th:text="${rectangle.width}"></td>
+                            <td th:text="${rectangle.height}"></td>
                             <td>
                                 <div class="btn-group" role="group">
                                     <form th:action="@{/rectangles/delete}" th:method="post" class="d-inline">
-                                        <input type="hidden" name="name" th:value="${rectangle.name}" />
+                                        <input type="hidden" name="rid" th:value="${rectangle.rid}" />
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
-                                    <a th:href="@{'/displayUpdatedRectanglesForm?rid=' + ${rectangle.rid}}" class="btn btn-secondary">Update</a>
                                 </div>
                             </td>
                         </tr>
