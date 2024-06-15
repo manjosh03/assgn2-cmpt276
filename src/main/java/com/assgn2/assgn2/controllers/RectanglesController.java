@@ -43,17 +43,24 @@ public class RectanglesController {
         return "rectangles/rectangleAdded"; // 'rectangleAdded.html' is in 'src/main/resources/templates/'
     }
 
+    @GetMapping("rectangles/modify")
+    public String modifyRectangle(@RequestParam("rid") int rid, Model model) {
+        Rectangles rectangle = rectanglesRepo.findById(rid).orElse(null);
+        model.addAttribute("rectangle", rectangle);
+        return "rectangles/displayUpdatedRectanglesForm"; // Ensure 'modify.html' is in 'src/main/resources/templates/'
+    }
+
     @GetMapping("/rectangle-form")
     public String viewForm() {
         return "rectangles/rectangleForm"; // Ensure 'rectangleForm.html' is in 'src/main/resources/templates/'
     }
 
-    @GetMapping("/displayUpdatedRectanglesForm")
-    public String viewUpdatedRectangleForm(@RequestParam("rid") int rid, Model model) {
-        Rectangles rectangle = rectanglesRepo.findById(rid).orElse(null);
-        model.addAttribute("rectangle", rectangle);
-        return "displayUpdatedRectanglesForm"; // Ensure 'displayUpdatedRectanglesForm.html' is in 'src/main/resources/templates/'
-    }
+    // @GetMapping("/displayUpdatedRectanglesForm")
+    // public String viewUpdatedRectangleForm(@RequestParam("rid") int rid, Model model) {
+    //     Rectangles rectangle = rectanglesRepo.findById(rid).orElse(null);
+    //     model.addAttribute("rectangle", rectangle);
+    //     return "displayUpdatedRectanglesForm"; // Ensure 'displayUpdatedRectanglesForm.html' is in 'src/main/resources/templates/'
+    // }
 
     @PostMapping("/rectangles/update")
     public String updateRectangle(@RequestParam Map<String, String> rectangleFormUpdated) {

@@ -21,7 +21,7 @@
         <h1 class="text-center mt-5">Update Rectangle Form</h1>
         <div id="form-content" class="d-flex justify-content-center mt-4">
             <form class="w-50" action="/rectangles/update" method="post">
-                <input type="hidden" id="id" name="id" th:value="${rectangle.id}" />
+                <input type="hidden" id="rid" name="rid" th:value="${rectangle.rid}" />
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text" class="form-control" id="name" name="name" th:value="${rectangle.name}" required>

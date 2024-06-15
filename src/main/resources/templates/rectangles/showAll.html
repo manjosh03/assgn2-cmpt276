@@ -28,14 +28,14 @@
                     <tbody>
                         <tr th:each="rectangle : ${rectangles}">
                             <td th:text="${rectangle.rid}"></td>
-                            <td>
-                                <a th:href="@{'/modify.html=' + ${rectangle.rid}}" th:text="${rectangle.name}"></a>
-                            </td>
+                            <td th:text = "${rectangle.name}"></td>
                             <td th:text="${rectangle.color}"></td>
                             <td th:text="${rectangle.width}"></td>
                             <td th:text="${rectangle.height}"></td>
                             <td>
                                 <div class="btn-group" role="group">
+                                    <a th:href="@{'/rectangles/modify?rid=' + ${rectangle.rid}}" class="btn btn-secondary"> Modify </a>
+
                                     <form th:action="@{/rectangles/delete}" th:method="post" class="d-inline">
                                         <input type="hidden" name="rid" th:value="${rectangle.rid}" />
                                         <button type="submit" class="btn btn-danger">Delete</button>
